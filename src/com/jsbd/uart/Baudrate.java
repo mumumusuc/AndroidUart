@@ -1,0 +1,35 @@
+package com.jsbd.uart;
+
+public class Baudrate {
+	public static int B0 = 0000000;  
+	public static int B50 = 0000001;
+	public static int B75 = 0000002;
+	public static int B110 = 0000003;
+	public static int B134 = 0000004;
+	public static int B150 = 0000005;
+	public static int B200 = 0000006;
+	public static int B300 = 0000007;
+	public static int B600 = 0000010;
+	public static int B1200 = 0000011;
+	public static int B1800 = 0000012;
+	public static int B2400 = 0000013;
+	public static int B4800 = 0000014;
+	public static int B9600 = 0000015;
+	public static int B19200 = 0000016;
+	public static int B38400 = 0000017;
+	public static int B57600 = 0010001;
+	public static int B115200 = 0010002;
+	public static int B230400 = 0010003;
+	public static int B460800 = 0010004;
+	public static int B500000 = 0010005;
+	public static int B576000 = 0010006;
+	public static int B921600 = 0010007;
+	public static int B1000000 = 0010010;
+	public static int B1152000 = 0010011;
+	public static int B1500000 = 0010012;
+	public static int B2000000 = 0010013;
+	public static int B2500000 = 0010014;
+	public static int B3000000 = 0010015;
+	public static int B3500000 = 0010016;
+	public static int B4000000 = 0010017;
+};
