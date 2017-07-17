@@ -7,12 +7,12 @@
         android:id="@+id/log_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:background="#000"
         android:maxLines="15"
         android:scrollbars="vertical"
         android:singleLine="false"
-        android:textColor="#ff007700" />
+        android:textColor="#ff00ff00" />
 
     <TextView
         android:id="@+id/connect"
@@ -36,5 +36,24 @@
         android:onClick="onDisconnect"
         android:text="断开"
         android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/disconnect"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:onClick="onSend"
+        android:text="发送"
+        android:textColor="#fff" />
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:hint="logcat" />
 
 </RelativeLayout>

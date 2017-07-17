@@ -10,6 +10,8 @@ public abstract class LogBinder extends Binder {
 	public abstract void open(String port,int br,Option opt,String save);
 	
 	public abstract void close();
+	
+	public abstract void send(String msg);
 
 	public interface Callback {
 		void onMessage(String msg);

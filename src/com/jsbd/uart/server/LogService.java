@@ -40,6 +40,7 @@ public class LogService extends Service {
 
 		@Override
 		public void open(String port, int buadrate,Option opt,String saveto) {
+			destroy();
 			PORT_NAME = port;
 			PORT_BAUDRATE = buadrate;
 			OPT = opt;
@@ -50,6 +51,13 @@ public class LogService extends Service {
 		@Override
 		public void close() {
 			destroy();
+		}
+
+		@Override
+		public void send(String msg) {
+			if(mUartHandler != null){
+				mUartHandler.send(msg);
+			}
 		}
 	};
 

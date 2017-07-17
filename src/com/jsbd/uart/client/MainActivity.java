@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements Callback {
@@ -21,12 +22,14 @@ public class MainActivity extends Activity implements Callback {
 	private TextView mLogText;
 	private StringBuilder mSB;
 	private LogBinder mBinder;
+	private EditText mEdit;
 
 	@Override
 	protected void onCreate(Bundle arg) {
 		super.onCreate(arg);
 		this.setContentView(R.layout.main_layout);
 		mLogText = (TextView) findViewById(R.id.log_test);
+		mEdit = (EditText) findViewById(R.id.input);
 		Intent intent = new Intent("com.jsbd.uart.START_LOG");
 		intent.putExtra("FROM", getClass().getName());
 		bindService(intent, mConnection, BIND_AUTO_CREATE);
@@ -72,7 +75,13 @@ public class MainActivity extends Activity implements Callback {
 	public void onDisconnect(View view){
 		if(mBinder != null){
 			mBinder.close();
-			//startService(new Intent(this,LogService.class));
+		}
+	}
+	
+	public void onSend(View view){
+		String msg = null;
+		if(mBinder != null && (msg = mEdit.getText().toString())!=null){
+			mBinder.send(msg);
 		}
 	}
 }

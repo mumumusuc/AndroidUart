@@ -59,12 +59,12 @@ public class UartHandler {
 				}
 			}
 		};
-		if (mHandler != null) {
-			mHandler.post(send);
-		} else {
+//		if (mHandler != null) {
+//			mHandler.post(send);
+//		} else {
 			/* this MAY cause ANR */
 			send.run();
-		}
+//		}
 	}
 	
 	private Thread mReceiveThread = new Thread() {
