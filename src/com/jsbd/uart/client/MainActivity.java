@@ -1,7 +1,9 @@
 package com.jsbd.uart.client;
 
+import com.jsbd.uart.Baudrate;
 import com.jsbd.uart.LogBinder;
 import com.jsbd.uart.LogBinder.Callback;
+import com.jsbd.uart.server.LogService;
 import com.jsbd.uart.R;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -10,14 +12,15 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements Callback {
 	private static final String TAG = "NativeUart_acticity";
 
-	private boolean isBound = false;
 	private TextView mLogText;
 	private StringBuilder mSB;
+	private LogBinder mBinder;
 
 	@Override
 	protected void onCreate(Bundle arg) {
@@ -33,16 +36,15 @@ public class MainActivity extends Activity implements Callback {
 
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			isBound = true;
-			LogBinder binder = (LogBinder) service;
-			binder.regLog(MainActivity.this);
+			mBinder = (LogBinder) service;
+			mBinder.regLog(MainActivity.this);
 			mSB = new StringBuilder();
 			Log.i(TAG, "onServiceConnected");
 		}
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
-			isBound = false;
+			mBinder = null;
 			Log.v(TAG, "onServiceDisconnected");
 		}
 	};
@@ -60,4 +62,18 @@ public class MainActivity extends Activity implements Callback {
 			mSB.delete(0, mSB.length());
 		}
 	}
+	
+	public void onConnect(View view){
+		if(mBinder != null){
+			mBinder.open("/dev/ttyMT5", Baudrate.B921600, null, "save1.log");
+		}
+	}
+	
+	public void onDisconnect(View view){
+		if(mBinder != null){
+			mBinder.close();
+			//startService(new Intent(this,LogService.class));
+		}
+	}
 }
+

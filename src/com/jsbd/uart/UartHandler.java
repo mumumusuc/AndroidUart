@@ -10,9 +10,14 @@ import android.util.Log;
 public class UartHandler {
 
 	private static final String TAG = "NativeUart_UartHandler";
+	
+	public static enum Option{
+		BYTE,STRING
+	};
 
 	private Handler mHandler;
 	private NativeUart mUart;
+	private Option mOption = Option.STRING;
 
 	private UartHandler() {	}
 	
@@ -31,6 +36,13 @@ public class UartHandler {
 
 	public void receive(Handler handler) {
 		mHandler = handler;
+	}
+	
+	public void receive(Handler handler,Option option) {
+		mHandler = handler;
+		if(option != null){
+			mOption = option;
+		}
 	}
 
 	public void send(final String msg) {
@@ -68,8 +80,13 @@ public class UartHandler {
 					try {
 						while (!Thread.interrupted() && (read = is.read(data)) > -1) {
 							for (int i = 0; i < read; i++) {
-								builder.append((char)data[i]);
-							//	builder.append(Integer.toHexString(data[i]&0xFF));
+								if(mOption == Option.BYTE){
+									builder.append(Integer.toHexString(data[i]&0xFF));
+									builder.append(" ");
+								}
+								else{
+									builder.append((char)data[i]);
+								}
 							}
 							String msg = builder.toString();
 							mHandler.obtainMessage(read, msg).sendToTarget();

@@ -5,11 +5,36 @@
 
     <TextView
         android:id="@+id/log_test"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#000"
         android:maxLines="15"
         android:scrollbars="vertical"
         android:singleLine="false"
-        android:textColor="#FF0000" />
+        android:textColor="#ff007700" />
+
+    <TextView
+        android:id="@+id/connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:onClick="onConnect"
+        android:text="连接"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/disconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/connect"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:onClick="onDisconnect"
+        android:text="断开"
+        android:textColor="#fff" />
 
 </RelativeLayout>

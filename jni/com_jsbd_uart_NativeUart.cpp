@@ -30,14 +30,9 @@ jobject JNICALL Java_com_jsbd_uart_NativeUart_open(JNIEnv* env, jclass clz,
 
 JNIEXPORT
 void JNICALL Java_com_jsbd_uart_NativeUart_close(JNIEnv* env, jclass clz, jobject fd) {
-	jclass _FD = env->GetObjectClass(fd);
-	jfieldID mFdID = env->GetFieldID(_FD, "mFd","Ljava/io/FileDescriptor;");
 	jclass FileDescriptorClass = env->FindClass("java/io/FileDescriptor");
 	jfieldID descriptorID = env->GetFieldID(FileDescriptorClass,"descriptor", "I");
-
-	jobject mFd = env->GetObjectField(fd, mFdID);
-	jint descriptor = env->GetIntField(mFd, descriptorID);
-
+	jint descriptor = env->GetIntField(fd, descriptorID);
 	LOGD("close(fd = %d)", descriptor);
 	closeUart(descriptor);
 }
